@@ -1,0 +1,11 @@
+{
+	"Item": {
+		"Review_Number": {
+			"S": "10"
+		},
+		"Approval_Status": {
+			"S": "Pending"
+		}
+	},
+	"ReturnConsumedCapacity": "TOTAL"
+}

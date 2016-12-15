@@ -1,0 +1,20 @@
+{
+	"AttributeDefinitions": [{
+		"AttributeName": "Maintenance_Number",
+		"AttributeType": "S"
+	}, {
+		"AttributeName": "Servicer",
+		"AttributeType": "S"
+	}],
+	"KeySchema": [{
+		"AttributeName": "Maintenance_Number",
+		"KeyType": "HASH"
+	}, {
+		"AttributeName": "Servicer",
+		"KeyType": "RANGE"
+	}],
+	"ProvisionedThroughput": {
+		"ReadCapacityUnits": 5,
+		"WriteCapacityUnits": 5
+	}
+}

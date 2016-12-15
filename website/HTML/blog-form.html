@@ -1,0 +1,44 @@
+<div id="page-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">{{blogFormCtrl.header}}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <i class="fa fa-file-o fa-fw"></i> <a target="_blank" ng-href="{{blogFormCtrl.blogUrl}}" ng-show="blogFormCtrl.editing">View on visitor site</a>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
+              <form ng-submit="blogFormCtrl.submitBlog()">
+                <div class="form-group">
+                  <h3>Title</h3>
+                  <input class="form-control" ng-attr-placeholder="{{blogFormCtrl.titlePlaceholder}}" ng-model="blogFormCtrl.blog.title" ng-disabled="blogFormCtrl.retrieving" required>
+                </div>
+                <div class="form-group">
+                  <h4>Description</h4>
+                  <input class="form-control" ng-attr-placeholder="{{blogFormCtrl.descriptionPlaceholder}}" ng-model="blogFormCtrl.blog.description" ng-disabled="blogFormCtrl.retrieving" required>
+                </div>
+                <div class="form-group">
+                  <h4>Keywords (seperate with spaces)</h4>
+                  <input class="form-control" ng-attr-placeholder="{{blogFormCtrl.keywordsPlaceholder}}" ng-model="blogFormCtrl.blog.keywords" ng-disabled="blogFormCtrl.retrieving" required>
+                </div>
+                <div class="form-group">
+                  <h4>Body</h4>
+                  <textarea rows="25" ng-model="blogFormCtrl.blog.content" ng-disabled="blogFormCtrl.retrieving" ui-tinymce="blogFormCtrl.tinymceOptions" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" ng-disabled="blogFormCtrl.retrieving">Publish</button>
+                <button type="button" class="btn btn-danger" ng-disabled="blogFormCtrl.retrieving">Cancel</button>
+              </form>
+            </div>
+            <div class="col-lg-1"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

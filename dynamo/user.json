@@ -1,0 +1,26 @@
+{
+	"Item": {
+		"ID": {
+			"S": "27"
+		},
+		"First_Name": {
+			"S": "Steffan"
+		},
+		"Last_Name": {
+			"S": "Universe"
+		},
+		"Username": {
+			"S": "Suniverse"
+		},
+		"Password": {
+			"S": "$pbkdf2-sha256$10000$8J5TqrX2fs/537tXKsUYgw$gZv3DmaPzyfQKnmh7F5689c4HO0yLVPcgaOn5fgF.58"
+		},
+		"Role_ID": {
+			"S": "QA2"
+		},
+		"Email": {
+			"S": "Rollthedice@gmail.com"
+		}
+	},
+	"ReturnConsumedCapacity": "TOTAL"
+}

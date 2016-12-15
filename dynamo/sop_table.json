@@ -1,0 +1,20 @@
+{
+	"AttributeDefinitions": [{
+		"AttributeName": "SOP_Number",
+		"AttributeType": "S"
+	}, {
+		"AttributeName": "Department",
+		"AttributeType": "S"
+	}],
+	"KeySchema": [{
+		"AttributeName": "SOP_Number",
+		"KeyType": "HASH"
+	}, {
+		"AttributeName": "Department",
+		"KeyType": "RANGE"
+	}],
+	"ProvisionedThroughput": {
+		"ReadCapacityUnits": 5,
+		"WriteCapacityUnits": 5
+	}
+}

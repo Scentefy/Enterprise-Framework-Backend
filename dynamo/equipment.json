@@ -1,0 +1,23 @@
+{
+	"Item": {
+		"Equipment_Number": {
+			"S": "16"
+		},
+		"Equipment_name": {
+			"S": "Pasturizer"
+		},
+		"Last_Maintain_Date": {
+			"S": "10/10/12"
+		},
+		"Next_Maintain_Date": {
+			"S": "10/10/16"
+		},
+		"Fequency": {
+			"N": 2
+		},
+		"Maintained": {
+			"N": 1
+		}
+	},
+	"ReturnConsumedCapacity": "TOTAL"
+}

@@ -1,0 +1,29 @@
+{
+	"request" : "put_record",
+    "table_name" : "USER_TABLE",
+	"parameters" : {
+		"Email" : { "S" :"123@123"},
+		"ID" : { "S": "1" },
+		"Password" : { "S": "1" },
+		"Role" : { "S": "1" },
+		"Username" : { "S": "1" }
+	}
+}
+
+{
+	"request" : "put_record",
+	"parameters" : {
+		"RoleName" : { "S" :"1"},
+        "Permissions" : { "SS" : ["1"] }
+	},
+	"table_name" : "ROLE_TABLE"
+}
+
+{
+	"request" : "remove_record",
+	"parameters" : {
+		"key" : "1",
+        "key_name" : "RoleName"
+	},
+	"table_name" : "ROLE_TABLE"
+}

@@ -1,0 +1,59 @@
+{
+	"Item": {
+		"Skew": {
+			"S": 23
+		},
+		"Date_Created:": {
+			"S": "13/10/2016"
+		},
+		"ID": {
+			"N": 1
+		},
+		"Batch_Number": {
+			"N": 69
+		},
+		"Cost": {
+			"S": "$2.50"
+		},
+		"Manufacture_Date": {
+			"S": "10/12/2016"
+		},
+		"Best_Before": {
+			"S": "15/12/2016"
+		},
+		"Item_Quantity": {
+			"N": 20
+		},
+		"Pallet_Quantity": {
+			"N": 12
+		},
+		"Pallet_Number": {
+			"N": 2
+		},
+		"Issue_Description": {
+			"S": "Found fly inside yogurt."
+		},
+		"Criteria": {
+			"S": "Bio-Animal"
+		},
+		"Immediate_Actions": {
+			"S": "Isolated problem, Recalled Batch"
+		},
+		"Production_Description": {
+			"S": "Green Tea Yogurt"
+		},
+		"Root_Cause": {
+			"S": "Entrance left open."
+		},
+		"Preventive_Action": {
+			"S": "Employees make sure door is closed regularly"
+		},
+		"Person_Responsible": {
+			"S": "Steven"
+		},
+		"Approval": {
+			"S": "Pending"
+		}
+	},
+	"ReturnConsumedCapacity": "TOTAL"
+}

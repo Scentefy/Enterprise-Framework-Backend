@@ -1,0 +1,23 @@
+{
+	"Item": {
+		"Complaint_Number": {
+			"S": "30"
+		},
+		"Batch_Number": {
+			"N": 10
+		},
+		"Corrective_Action": {
+			"S": "Reimbursed with more yogurt"
+		},
+		"Date_Ordered": {
+			"S": "10/05/10"
+		},
+		"Date_Complaint_Issued": {
+			"S": "10/06/10"
+		},
+		"Complaint_Description": {
+			"S": "Yogurt is expired"
+		}
+	},
+	"ReturnConsumedCapacity": "TOTAL"
+}

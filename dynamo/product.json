@@ -1,0 +1,20 @@
+{
+	"Item": {
+		"ID": {
+			"N": 12
+		},
+		"Product_Number": {
+			"N": 1236
+		},
+		"Skew": {
+			"N": 154
+		},
+		"Product_Name": {
+			"S": "Green Yogurt"
+		},
+		"Product_Description": {
+			"S": "Delicious Avocado yogurt wrapped in cream"
+		}
+	},
+	"ReturnConsumedCapacity": "TOTAL"
+}

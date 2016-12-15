@@ -1,0 +1,20 @@
+{
+	"AttributeDefinitions": [{
+		"AttributeName": "Customer_Number",
+		"AttributeType": "S"
+	}, {
+		"AttributeName": "Batch_Number",
+		"AttributeType": "N"
+	}],
+	"KeySchema": [{
+		"AttributeName": "Customer_Number",
+		"KeyType": "HASH"
+	}, {
+		"AttributeName": "Batch_Number",
+		"KeyType": "RANGE"
+	}],
+	"ProvisionedThroughput": {
+		"ReadCapacityUnits": 5,
+		"WriteCapacityUnits": 5
+	}
+}

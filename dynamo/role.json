@@ -1,0 +1,14 @@
+{
+	"Item": {
+		"Role_Number": {
+			"S": "2"
+		},
+		"Role_Name": {
+			"S": "Admin"
+		},
+		"Role_Permissions": {
+			"SS": ["all"]
+		}
+	},
+	"ReturnConsumedCapacity": "TOTAL"
+}

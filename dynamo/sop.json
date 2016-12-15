@@ -1,0 +1,17 @@
+{
+	"Item": {
+		"SOP_Number": {
+			"S": "13"
+		},
+		"Description": {
+			"S": "Yogurt must be within this pH scale"
+		},
+		"Role": {
+			"S": "Preparation of Yogurt"
+		},
+		"Department": {
+			"S": "Prodution"
+		}
+	},
+	"ReturnConsumedCapacity": "TOTAL"
+}
