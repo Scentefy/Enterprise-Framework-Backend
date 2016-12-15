@@ -27,3 +27,8 @@
 	},
 	"table_name" : "ROLE_TABLE"
 }
+
+{
+	"request" : "get_records",
+	"table_name" : "USER_TABLE"
+}

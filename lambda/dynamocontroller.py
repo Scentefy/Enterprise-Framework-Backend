@@ -41,13 +41,8 @@ class DynamoController(object):
                 "error_message": e.response["Error"]["Code"],
                 "data": {"exception": str(e), "action": action}
             }
-        # if not "Items" in items:
-        #     return {
-        #         "status" : "failed",
-        #         "error": "InvalidItemSelection",
-        #         "data": {"key": parameters["key"], "action": action}}
-        
-        return {"message": "Successfully fetched items", "data": items["Items"]}
+
+        return {"message": "Successfully fetched items", "status" : "success", "data": items["Items"]}
 
     @staticmethod
     def get_record(table, parameters):
@@ -81,9 +76,9 @@ class DynamoController(object):
             return {
                 "status" : "failed",
                 "error": "InvalidItemSelection",
-                "data": {"key": parameters["key"], "action": action}}
+                "data": {"key": parameters["key"],  "action": action}}
             
-        return item["Item"]
+        return {"message": "Successfully fetched item", "status" : "success", "data": items["Item"]}
     
     @staticmethod
     def put_record(table, parameters):
@@ -116,7 +111,7 @@ class DynamoController(object):
                 "data": {"exception": str(e), "action": action}
             }
 
-        return {"message": "Successfully put item", "data": parameters}
+        return {"message": "Successfully put item", "status" : "success", "data": parameters}
 
     @staticmethod
     def remove_record(table, parameters):

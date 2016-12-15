@@ -18,6 +18,21 @@ class Security(object):
     """
 
     @staticmethod
+    def authenticate(token, request, token_table, user_table, role_table):
+        """
+        Function which checks if the user has an active session with system
+        by checking if the user has a token
+        """
+        pass
+
+    @staticmethod
+    def authorize(token, request, token_table, user_table, role_table):
+        """
+        Function checks if the user is allowed to perform the request
+        """
+        pass
+
+    @staticmethod
     def authenticate_and_authorize(token, request, token_table, user_table,
                                    role_table):
         """ Authenticates a token and checks that the associated user has the
@@ -263,3 +278,7 @@ class Security(object):
     @staticmethod
     def get_permissions_info():
         pass
+
+    @staticmethod
+    def login(username, password):
+        return True
