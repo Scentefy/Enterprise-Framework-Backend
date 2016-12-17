@@ -22,7 +22,7 @@ class DynamoController(object):
         Expected parameter input value
         {
             "request" : "get_records",
-            "table_name" : "USER_TABLE"
+            "table_name" : "USER_TABLE",
             "parameters" : {
 
             }
@@ -53,7 +53,7 @@ class DynamoController(object):
         Expected parameter input value
         {
             "request" : "get_record",
-            "table_name" : "USER_TABLE"
+            "table_name" : "USER_TABLE",
             "parameters" : {
                 "key_name" : "ID",
                 "key" : "123" 
@@ -122,7 +122,7 @@ class DynamoController(object):
         Expected parameter input value
         {
             "request" : "remove_record",
-            "table_name" : "USER_TABLE"
+            "table_name" : "USER_TABLE",
             "parameters" : {
                 "key_name" : "ID",
                 "key" : "123" 
