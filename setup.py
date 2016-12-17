@@ -25,16 +25,16 @@ if len(sys.argv) == 3:
 else:
     cms = cms_functions.AwsFunc(sys.argv[1])
 
-# Create tje rest api
-cms.create_rest_api()
+# # Create the rest api
+# cms.create_rest_api()
 
-# Create the lambda function
-cms.create_lambda_function()
+# # Create the lambda function
+# cms.create_lambda_function()
 
-# Setup the rest api
-cms.api_add_post_method()
-cms.api_add_options_method()
-cms.deploy_api()
+# # Setup the rest api
+# cms.api_add_post_method()
+# cms.api_add_options_method()
+# cms.deploy_api()
 
 # Create the s3 bucket
 # cms.create_bucket()
@@ -47,21 +47,22 @@ cms.deploy_api()
 # Create the dynamodb page table
 # cms.create_page_table()
 
-# Create the dynamodb token table
-cms.create_token_table()
+# # Create the dynamodb token table
+# cms.create_token_table()
 
-# Create the dunamodb role table
-cms.create_role_table()
-# Add an admin role to the role table
-# cms.create_admin_role_db_entry()
+# # Create the dunamodb role table
+# cms.create_role_table()
+# # Add an admin role to the role table
+# # cms.create_admin_role_db_entry()
 
-# Create the dynamodb user table
+# # Create the dynamodb user table
 cms.create_user_table()
 # Add an admin to the user table
 # cms.create_admin_user_db_entry()
+# cms.add_secondary_indexes()
 
-# # Print the default login credentials and the login link
-# cms.print_login_link()
+# # # Print the default login credentials and the login link
+# # cms.print_login_link()
 
-# Saves the cms installation information
-cms.save_constants()
+# # Saves the cms installation information
+# cms.save_constants()

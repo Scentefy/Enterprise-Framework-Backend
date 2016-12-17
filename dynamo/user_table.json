@@ -1,34 +1,42 @@
 {
-	"AttributeDefinitions": [{
-		"AttributeName": "ID",
-		"AttributeType": "S"
-	}, {
-		"AttributeName": "First_Name",
-		"AttributeType": "S"
-	}, {
-		"AttributeName": "Last_Name",
-		"AttributeType": "S"
-	}],
-	"KeySchema": [{
-		"AttributeName": "ID",
-		"KeyType": "HASH"
-	}, {
-		"AttributeName": "First_Name",
-		"KeyType": "RANGE"
-	}],
-	"LocalSecondaryIndexes": [{
-		"IndexName": "LastPostIndex",
-		"KeySchema": [{
+	"AttributeDefinitions": [
+		{
+			"AttributeName": "ID",
+			"AttributeType": "S"
+		},
+		{
+			"AttributeName": "First_Name",
+			"AttributeType": "S"
+		}	
+	],
+	"KeySchema": [
+		{
 			"AttributeName": "ID",
 			"KeyType": "HASH"
-		}, {
-			"AttributeName": "Last_Name",
-			"KeyType": "RANGE"
-		}],
-		"Projection": {
-			"ProjectionType": "KEYS_ONLY"
 		}
-	}],
+	],
+	"GlobalSecondaryIndexes": [
+		{ 
+			"IndexName": "first_name_index",
+			"KeySchema" : [
+				{
+					"AttributeName": "ID",
+					"KeyType": "HASH"
+				},
+				{
+					"AttributeName": "First_Name",
+					"KeyType": "RANGE"
+				}
+			],
+			"Projection" : {
+				"ProjectionType" : "ALL"
+			},
+			"ProvisionedThroughput" : {
+				"ReadCapacityUnits" : 2,
+				"WriteCapacityUnits" : 2
+			}
+		}
+	],
 	"ProvisionedThroughput": {
 		"ReadCapacityUnits": 5,
 		"WriteCapacityUnits": 5

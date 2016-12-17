@@ -243,3 +243,61 @@
 #             response[index] = strip_dynamo_types(response[index])
         
 #     return response
+
+
+	"LocalSecondaryIndexes": [
+		{
+			"IndexName": "LastNameIndex",
+			"KeySchema": [
+			{
+				"AttributeName": "ID",
+				"KeyType": "HASH"
+			}, 
+			{
+				"AttributeName": "Last_Name",
+				"KeyType": "RANGE"
+			}
+		],
+		"Projection": 
+		{
+			"ProjectionType": "KEYS_ONLY"
+		}
+	},
+	{
+		"IndexName": "FIrstNameIndex",
+		"KeySchema": [
+			{
+				"AttributeName": "ID",
+				"KeyType": "HASH"
+			}, 
+			{
+				"AttributeName": "First_Name",
+				"KeyType": "RANGE"
+			}
+		],
+		"Projection": {
+			"ProjectionType": "KEYS_ONLY"
+		}
+	}
+	],
+
+
+
+
+    		{
+			"AttributeName": "First_Name",
+			"AttributeType": "S"
+		}, 
+		{
+			"AttributeName": "Last_Name",
+			"AttributeType": "S"
+		}
+
+        		{
+			"AttributeName": "Last_Name",
+			"KeyType": "RANGE"
+		},
+		{
+			"AttributeName": "First_Name",
+			"KeyType": "RANGE"
+		}
