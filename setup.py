@@ -65,4 +65,4 @@ cms.create_user_table()
 # # cms.print_login_link()
 
 # # Saves the cms installation information
-# cms.save_constants()
+cms.save_constants()

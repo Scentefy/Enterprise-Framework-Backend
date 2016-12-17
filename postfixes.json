@@ -1,11 +1,11 @@
 {
     "BUCKET": "-aws-cms",
     "REST_API": "-aws-api",
-    "LAMBDA_FUNCTION": "-aws-cms-Controller",
+    "LAMBDA_FUNCTION": "-aws-sys-Controller",
     "LAMBDA_ROLE": "-aws-Lambda",
-    "BLOG_TABLE": "-aws-cms-Blog",
-    "PAGE_TABLE": "-aws-cms-Page",
-	"ROLE_TABLE": "-aws-cms-Role",
-    "TOKEN_TABLE": "-aws-cms-Token",
-    "USER_TABLE": "-aws-cms-User"
+    "BLOG_TABLE": "-aws-sys-Blog",
+    "PAGE_TABLE": "-aws-sys-Page",
+	"ROLE_TABLE": "-aws-sys-Role",
+    "TOKEN_TABLE": "-aws-sys-Token",
+    "USER_TABLE": "-aws-sys-User"
 }
