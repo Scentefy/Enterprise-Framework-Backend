@@ -3,22 +3,22 @@
 		"Skew": {
 			"S": "2as234dasd2342344322344dasq3"
 		},
-		"DateCreated:": {
+		"DateIssd:": {
 			"S": "13/10/2016"
 		},
 		"ID": {
 			"S": "ljkl12n3jk12hn3"
 		},
-		"Batch_Number": {
+		"BatchNumber": {
 			"N": 69
 		},
 		"Cost": {
 			"S": "$2.50"
 		},
-		"ManufactureDate": {
+		"DateMnfct": {
 			"S": "10/12/2016"
 		},
-		"BestBefore": {
+		"DateBB": {
 			"S": "15/12/2016"
 		},
 		"ItemQuantity": {
