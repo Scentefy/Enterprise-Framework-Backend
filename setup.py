@@ -56,9 +56,10 @@ else:
 # # cms.create_admin_role_db_entry()
 
 # # Create the dynamodb user table
-cms.create_user_table()
+# cms.create_user_table()
+cms.create_table("user_table","USER_TABLE")
 # Add an admin to the user table
-cms.create_admin_user_db_entry()
+cms.create_admin_default_entry("user","USER_TABLE")
 
 # # # Print the default login credentials and the login link
 # # cms.print_login_link()
