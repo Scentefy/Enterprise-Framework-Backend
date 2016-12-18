@@ -45,6 +45,38 @@ class DynamoController(object):
         return {"message": "Successfully fetched items", "status" : "success", "data": items["Items"]}
 
     @staticmethod
+    def get_records_date_range(table, parameters):
+        """
+        Function which is used to fetch all records from a table
+
+        Expected parameter input value
+        {
+            "request" : "get_records",
+            "table_name" : "USER_TABLE",
+            "parameters" : {
+                "key_name" : "DateMnfct",
+                "date_from" : "2016-12-19"
+                "date_to" : "2016-12-20"
+            }
+        }
+        """
+        action = "Getting items from the " + table + " table"
+        try:
+            dynamodb = boto3.client("dynamodb")
+            items = dynamodb.scan(
+                TableName=table, 
+                ConsistentRead=True
+            )
+        except botocore.exceptions.ClientError as e:
+            return { 
+                "status" : "failed",
+                "error_message": e.response["Error"]["Code"],
+                "data": {"exception": str(e), "action": action}
+            }
+
+        return {"message": "Successfully fetched items", "status" : "success", "data": items["Items"]}
+
+    @staticmethod
     def get_record(table, parameters):
         """
         Function which is used to fetch a specific record using the primary 
