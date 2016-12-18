@@ -181,6 +181,23 @@ class AwsFunc:
         except botocore.exceptions.ClientError as e:
             print e
             sys.exit()
+    
+    def create_table(self, table_name, constants):
+        """ Creates a table. """
+        with open("dynamo/"+ table_name + ".json", "r") as thefile:
+            table_json = json.loads(thefile.read())
+        table_json["TableName"] = self.constants[constants]
+        
+        try:
+            print "Creating table: %s" % (self.constants[constants])
+            dynamodb = boto3.client("dynamodb")
+            table = dynamodb.create_table(**table_json)
+            self.wait_for_table(table)
+            print "Table created"
+        except botocore.exceptions.ClientError as e:
+            print e.response["Error"]["Code"]
+            print e.response["Error"]["Message"]
+            sys.exit()
 
     def create_user_table(self):
         """ Creates a user table. """
@@ -292,6 +309,23 @@ class AwsFunc:
             time.sleep(0.1)
             response = dynamodb.describe_table(
                 TableName=table["TableDescription"]["TableName"])
+
+    def create_admin_default_entry(self, table_name, constants):
+        """ Creates an entry in the database that represents an admin """
+        with open("dynamo/"+ table_name +".json", "r") as thefile:
+            default_json = json.loads(thefile.read())
+        default_json["TableName"] = self.constants[constants]
+        default_json["Item"]["ID"] = {"S": str(uuid.uuid4())}
+        
+        try:
+            print "Creating admin db entry"
+            dynamodb = boto3.client("dynamodb")
+            dynamodb.put_item(**default_json)
+            print "Admin db entry created"
+        except botocore.exceptions.ClientError as e:
+            print e.response["Error"]["Code"]
+            print e.response["Error"]["Message"]
+            sys.exit()
 
     def create_admin_user_db_entry(self):
         """ Creates an entry in the user database that represents an admin """
