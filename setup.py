@@ -58,8 +58,7 @@ else:
 # # Create the dynamodb user table
 cms.create_user_table()
 # Add an admin to the user table
-# cms.create_admin_user_db_entry()
-# cms.add_secondary_indexes()
+cms.create_admin_user_db_entry()
 
 # # # Print the default login credentials and the login link
 # # cms.print_login_link()

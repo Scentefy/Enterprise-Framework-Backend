@@ -3,10 +3,10 @@
 		"ID": {
 			"S": "27"
 		},
-		"First_Name": {
+		"FName": {
 			"S": "Steffan"
 		},
-		"Last_Name": {
+		"LName": {
 			"S": "Universe"
 		},
 		"Username": {
@@ -15,11 +15,11 @@
 		"Password": {
 			"S": "$pbkdf2-sha256$10000$8J5TqrX2fs/537tXKsUYgw$gZv3DmaPzyfQKnmh7F5689c4HO0yLVPcgaOn5fgF.58"
 		},
-		"Role_ID": {
+		"RoleID": {
 			"S": "QA2"
 		},
 		"Email": {
-			"S": "Rollthedice@gmail.com"
+			"S": "rollthedice@gmail.com"
 		}
 	},
 	"ReturnConsumedCapacity": "TOTAL"

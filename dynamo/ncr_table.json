@@ -1,17 +1,11 @@
 {
 	"AttributeDefinitions": [{
-		"AttributeName": "Skew",
-		"AttributeType": "S"
-	}, {
-		"AttributeName": "Date_Created",
+		"AttributeName": "ID",
 		"AttributeType": "S"
 	}],
 	"KeySchema": [{
-		"AttributeName": "Skew",
+		"AttributeName": "ID",
 		"KeyType": "HASH"
-	}, {
-		"AttributeName": "Date_Created",
-		"KeyType": "RANGE"
 	}],
 	"ProvisionedThroughput": {
 		"ReadCapacityUnits": 5,

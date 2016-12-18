@@ -1,16 +1,13 @@
 {
 	"Item": {
-		"Maintenance_Number": {
+		"MaintenanceNumber": {
 			"S": "201"
 		},
 		"Servicer": {
 			"S": "Steve"
 		},
-		"Date": {
+		"ServiceDate": {
 			"S": "10/10/16"
-		},
-		"Note": {
-			"S": "Needs to clean rust off machine"
 		}
 	},
 	"ReturnConsumedCapacity": "TOTAL"

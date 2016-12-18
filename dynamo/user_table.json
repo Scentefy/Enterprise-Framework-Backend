@@ -5,7 +5,7 @@
 			"AttributeType": "S"
 		},
 		{
-			"AttributeName": "First_Name",
+			"AttributeName": "FName",
 			"AttributeType": "S"
 		}	
 	],
@@ -17,14 +17,14 @@
 	],
 	"GlobalSecondaryIndexes": [
 		{ 
-			"IndexName": "first_name_index",
+			"IndexName": "FNameIndex",
 			"KeySchema" : [
 				{
 					"AttributeName": "ID",
 					"KeyType": "HASH"
 				},
 				{
-					"AttributeName": "First_Name",
+					"AttributeName": "FName",
 					"KeyType": "RANGE"
 				}
 			],

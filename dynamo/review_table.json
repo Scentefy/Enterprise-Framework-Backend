@@ -2,16 +2,10 @@
 	"AttributeDefinitions": [{
 		"AttributeName": "Review_Number",
 		"AttributeType": "S"
-	}, {
-		"AttributeName": "Role_Name",
-		"AttributeType": "S"
 	}],
 	"KeySchema": [{
 		"AttributeName": "Review_Number",
 		"KeyType": "HASH"
-	}, {
-		"AttributeName": "Role_Name",
-		"KeyType": "RANGE"
 	}],
 	"ProvisionedThroughput": {
 		"ReadCapacityUnits": 5,

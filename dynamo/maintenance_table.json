@@ -1,16 +1,16 @@
 {
 	"AttributeDefinitions": [{
-		"AttributeName": "Maintenance_Number",
+		"AttributeName": "MaintenanceNumber",
 		"AttributeType": "S"
 	}, {
-		"AttributeName": "Servicer",
+		"AttributeName": "ServiceDate",
 		"AttributeType": "S"
 	}],
 	"KeySchema": [{
-		"AttributeName": "Maintenance_Number",
+		"AttributeName": "MaintenanceNumber",
 		"KeyType": "HASH"
 	}, {
-		"AttributeName": "Servicer",
+		"AttributeName": "ServiceDate",
 		"KeyType": "RANGE"
 	}],
 	"ProvisionedThroughput": {
