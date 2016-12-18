@@ -7,5 +7,6 @@
     "PAGE_TABLE": "-aws-sys-Page",
 	"ROLE_TABLE": "-aws-sys-Role",
     "TOKEN_TABLE": "-aws-sys-Token",
-    "USER_TABLE": "-aws-sys-User"
+    "USER_TABLE": "-aws-sys-User",
+    "NCR_TABLE": "-aws-sys-NCR"
 }
