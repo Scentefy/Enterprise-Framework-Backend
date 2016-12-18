@@ -18,7 +18,7 @@ class Page(object):
     
     @staticmethod
     def get_all_pages(page_table):
-        """ Fetches all entries from the page table """
+        """ Fetches all entries from the page tables """
         try:
             dynamodb = boto3.client('dynamodb')
             pages = dynamodb.scan(
