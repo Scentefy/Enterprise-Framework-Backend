@@ -311,33 +311,17 @@ class AwsFunc:
                 TableName=table["TableDescription"]["TableName"])
 
     def create_default_db_entry(self, table_name, constants):
-        """ Creates an entry in the database that represents an admin """
+        """ Creates an entry in the database """
         with open("dynamo/"+ table_name +".json", "r") as thefile:
             default_json = json.loads(thefile.read())
         default_json["TableName"] = self.constants[constants]
         default_json["Item"]["ID"] = {"S": str(uuid.uuid4())}
         
         try:
-            print "Creating admin db entry"
+            print "Creating db entry"
             dynamodb = boto3.client("dynamodb")
             dynamodb.put_item(**default_json)
-            print "Admin db entry created"
-        except botocore.exceptions.ClientError as e:
-            print e.response["Error"]["Code"]
-            print e.response["Error"]["Message"]
-            sys.exit()
-
-    def debug_create_ncr_records(self, table_name, constants, record_count):
-        """ Creates an entry in the database that represents an admin """
-        with open("dynamo/"+ table_name +".json", "r") as thefile:
-            default_json = json.loads(thefile.read())
-        default_json["TableName"] = self.constants[constants]
-        default_json["Item"]["ID"] = {"S": str(uuid.uuid4())}
-        try:
-            print "Creating admin db entry"
-            dynamodb = boto3.client("dynamodb")
-            dynamodb.put_item(**default_json)
-            print "Admin db entry created"
+            print "db entry created"
         except botocore.exceptions.ClientError as e:
             print e.response["Error"]["Code"]
             print e.response["Error"]["Message"]

@@ -10,7 +10,7 @@
 			"S": "seconditem123123"
 		},
 		"BatchNumber": {
-			"N": 69
+			"N": "69"
 		},
 		"Cost": {
 			"S": "$2.50"
