@@ -10,7 +10,7 @@
 			"S": "secondItem123123"
 		},
 		"BatchNumber": {
-			"N": 69
+			"N": "69"
 		},
 		"Cost": {
 			"S": "$2.50"
@@ -22,13 +22,13 @@
 			"S": "15/12/2016"
 		},
 		"ItemQuantity": {
-			"N": 20
+			"N": "20"
 		},
 		"PalletQuantity": {
-			"N": 12
+			"N": "12"
 		},
 		"PalletNumber": {
-			"N": 2
+			"N": "2"
 		},
 		"IssueDescription": {
 			"S": "Found fly inside yogurt."
