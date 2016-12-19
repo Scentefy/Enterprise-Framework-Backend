@@ -26,15 +26,15 @@ else:
     cms = cms_functions.AwsFunc(sys.argv[1])
 
 # Create the rest api
-cms.create_rest_api()
+# cms.create_rest_api()
 
 # Create the lambda function
-cms.create_lambda_function()
+# cms.create_lambda_function()
 
 # Setup the rest api
-cms.api_add_post_method()
-cms.api_add_options_method()
-cms.deploy_api()
+# cms.api_add_post_method()
+# cms.api_add_options_method()
+# cms.deploy_api()
 
 # Create the s3 bucket
 # cms.create_bucket()
@@ -56,10 +56,10 @@ cms.deploy_api()
 # cms.create_default_db_entry("user","USER_TABLE")
 
 # Creates the NCR table
-cms.create_table("ncr_table","NCR_TABLE")
+# cms.create_table("ncr_table","NCR_TABLE")
 # Add a default value to the ncr table
 cms.create_default_db_entry("ncr_item","NCR_TABLE")
-cms.create_default_db_entry("ncr_item_2","NCR_TABLE")
+# cms.create_default_db_entry("ncr_item_2","NCR_TABLE")
 
 # # # Print the default login credentials and the login link
 # # cms.print_login_link()
