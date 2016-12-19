@@ -333,8 +333,6 @@ class AwsFunc:
             default_json = json.loads(thefile.read())
         default_json["TableName"] = self.constants[constants]
         default_json["Item"]["ID"] = {"S": str(uuid.uuid4())}
-        
-
         try:
             print "Creating admin db entry"
             dynamodb = boto3.client("dynamodb")
