@@ -319,18 +319,17 @@ class AwsFunc:
         default_json["Item"]["ID"] = {"S": str(uuid.uuid4())}
         
         try:
-<<<<<<< HEAD
             print "Creating admin db entry"
             dynamodb = boto3.client("dynamodb")
             dynamodb.put_item(**default_json)
 
-            for x in range(10):
-                nextdate = json.dumps({"Item" :"DateIssd"})
-                nextdate = nextdate.strftime("%a, %d-%b-%Y %H:%M:%S UTC")
-                nextdate = nextdate + datetime.timedelta(days=1)
-                default_json["Item"]["ID"] = {"S": str(uuid.uuid4())}
-                default_json["Item"]["DateIssd"] ={"S": str(nextdate())}
-                dynamodb.put_item(**default_json)
+        #    for x in range(10):
+        #        nextdate = json.dumps({"Item" :"DateIssd"})
+        #        nextdate = nextdate.strftime("%a, %d-%b-%Y %H:%M:%S UTC")
+        #        nextdate = nextdate + datetime.timedelta(days=1)
+        #        default_json["Item"]["ID"] = {"S": str(uuid.uuid4())}
+        #        default_json["Item"]["DateIssd"] ={"S": str(nextdate())}
+        #        dynamodb.put_item(**default_json)
 
             print "Admin db entry created"
         except botocore.exceptions.ClientError as e:
@@ -346,9 +345,7 @@ class AwsFunc:
         default_json["Item"]["ID"] = {"S": str(uuid.uuid4())}
         try:
             print "Creating admin db entry"
-=======
             print "Creating db entry"
->>>>>>> 1adad9b85df7bcb9be60901b861ecef32677f168
             dynamodb = boto3.client("dynamodb")
             dynamodb.put_item(**default_json)
             print "db entry created"
