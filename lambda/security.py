@@ -2,7 +2,6 @@
 # security.py
 # Author: Miguel Saavedra
 # Date: 05/08/2016
-# Edited: 10/09/2016 | Christopher Treadgold
 # Edited: 11/10/2016 | Miguel Saavedra
 """
 
@@ -16,8 +15,8 @@ class Security(object):
     """ Provides a function for authentication and authorization of requests
     through a provided token.
     """
-
-	@staticmethod
+    
+    @staticmethod
     def login(email, password, token, user_table, token_table):
         """ Validates a user login request.
             Adds a token to the token table and provides it as a cookie in the
