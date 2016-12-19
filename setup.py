@@ -57,9 +57,14 @@ else:
 
 # # Create the dynamodb user table
 # cms.create_user_table()
-cms.create_table("user_table","USER_TABLE")
+# cms.create_table("user_table","USER_TABLE")
 # Add an admin to the user table
-cms.create_admin_default_entry("user","USER_TABLE")
+# cms.create_admin_default_entry("user","USER_TABLE")
+
+# Creates the NCR table
+cms.create_table("ncr_table","NCR_TABLE")
+# Add a default value to the ncr table
+# cms.create_admin_default_entry("ncr_item","NCR_TABLE")
 
 # # # Print the default login credentials and the login link
 # # cms.print_login_link()

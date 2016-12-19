@@ -66,6 +66,26 @@
 				"WriteCapacityUnits" : 2
 			}
 		},
+						{ 
+			"IndexName": "CritIndx",
+			"KeySchema" : [
+				{
+					"AttributeName": "ID",
+					"KeyType": "HASH"
+				},
+				{
+					"AttributeName": "Criteria",
+					"KeyType": "RANGE"
+				}
+			],
+			"Projection" : {
+				"ProjectionType" : "ALL"
+			},
+			"ProvisionedThroughput" : {
+				"ReadCapacityUnits" : 2,
+				"WriteCapacityUnits" : 2
+			}
+		},
 				{ 
 			"IndexName": "DateMncftIdx",
 			"KeySchema" : [
