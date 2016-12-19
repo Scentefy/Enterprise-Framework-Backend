@@ -1,19 +1,7 @@
 {
 	"AttributeDefinitions": [
 		{
-		"AttributeName": "ID",
-		"AttributeType": "S"
-		},
-		{
-		"AttributeName": "DateIssd",
-		"AttributeType": "S"
-		},
-		{
-		"AttributeName": "DateMnfct",
-		"AttributeType": "S"
-		},
-		{
-		"AttributeName": "DateBB",
+		"AttributeName": "Skew",
 		"AttributeType": "S"
 		},
 		{
@@ -21,64 +9,24 @@
 		"AttributeType": "S"
 		},
 		{
-		"AttributeName": "MnfctYear",
+		"AttributeName": "DateMnfct",
 		"AttributeType": "S"
 		}
 	],
 	"KeySchema": [{
-		"AttributeName": "ID",
+		"AttributeName": "Skew",
 		"KeyType": "HASH"
 	}],
 	"GlobalSecondaryIndexes": [
 		{ 
-			"IndexName": "DateIssdIdx",
+			"IndexName": "CritIdx",
 			"KeySchema" : [
-				{
-					"AttributeName": "MnfctYear",
-					"KeyType": "HASH"
-				},
-				{
-					"AttributeName": "DateIssd",
-					"KeyType": "RANGE"
-				}
-			],
-			"Projection" : {
-				"ProjectionType" : "ALL"
-			},
-			"ProvisionedThroughput" : {
-				"ReadCapacityUnits" : 1,
-				"WriteCapacityUnits" : 1
-			}
-		},
-				{ 
-			"IndexName": "DateBBIdx",
-			"KeySchema" : [
-				{
-					"AttributeName": "MnfctYear",
-					"KeyType": "HASH"
-				},
-				{
-					"AttributeName": "DateBB",
-					"KeyType": "RANGE"
-				}
-			],
-			"Projection" : {
-				"ProjectionType" : "ALL"
-			},
-			"ProvisionedThroughput" : {
-				"ReadCapacityUnits" : 1,
-				"WriteCapacityUnits" : 1
-			}
-		},
-						{ 
-			"IndexName": "CritIndx",
-			"KeySchema" : [
-				{
-					"AttributeName": "MnfctYear",
-					"KeyType": "HASH"
-				},
 				{
 					"AttributeName": "Criteria",
+					"KeyType": "HASH"
+				},
+				{
+					"AttributeName": "DateMnfct",
 					"KeyType": "RANGE"
 				}
 			],
@@ -90,11 +38,31 @@
 				"WriteCapacityUnits" : 1
 			}
 		},
-				{ 
-			"IndexName": "DateMncftIdx",
+		{ 
+			"IndexName": "PrdctDescIdx",
 			"KeySchema" : [
 				{
-					"AttributeName": "MnfctYear",
+					"AttributeName": "ProductDescription",
+					"KeyType": "HASH"
+				},
+				{
+					"AttributeName": "DateMnfct",
+					"KeyType": "RANGE"
+				}
+			],
+			"Projection" : {
+				"ProjectionType" : "ALL"
+			},
+			"ProvisionedThroughput" : {
+				"ReadCapacityUnits" : 1,
+				"WriteCapacityUnits" : 1
+			}
+		},
+		{ 
+			"IndexName": "BtchNoIdx",
+			"KeySchema" : [
+				{
+					"AttributeName": "ProductDescription",
 					"KeyType": "HASH"
 				},
 				{

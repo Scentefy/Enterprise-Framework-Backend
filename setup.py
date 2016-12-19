@@ -24,16 +24,16 @@ if len(sys.argv) == 3:
 else:
     cms = cms_functions.AwsFunc(sys.argv[1])
 
-# Create the rest api
-cms.create_rest_api()
+# # Create the rest api
+# cms.create_rest_api()
 
-# Create the lambda function
-cms.create_lambda_function()
+# # Create the lambda function
+# cms.create_lambda_function()
 
-# Setup the rest api
-cms.api_add_post_method()
-cms.api_add_options_method()
-cms.deploy_api()
+# # Setup the rest api
+# cms.api_add_post_method()
+# cms.api_add_options_method()
+# cms.deploy_api()
 
 # Create the s3 bucket
 # cms.create_bucket()
@@ -56,6 +56,7 @@ cms.deploy_api()
 
 # Creates the NCR table
 cms.create_table("ncr_table","NCR_TABLE")
+cms.create_table("ncr_non_range_table","NCR_NR_TABLE")
 # DEBUG Add a default values to the ncr table TODO: Remove for release
 cms.create_default_db_entry("ncr_item","NCR_TABLE")
 # cms.create_default_db_entry("ncr_item_2","NCR_TABLE")

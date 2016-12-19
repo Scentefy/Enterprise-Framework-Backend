@@ -1,0 +1,122 @@
+{
+	"AttributeDefinitions": [
+		{
+		"AttributeName": "Skew",
+		"AttributeType": "S"
+		},
+		{
+		"AttributeName": "DateIssd",
+		"AttributeType": "S"
+		},
+		{
+		"AttributeName": "DateMnfct",
+		"AttributeType": "S"
+		},
+		{
+		"AttributeName": "DateBB",
+		"AttributeType": "S"
+		},
+		{
+		"AttributeName": "Criteria",
+		"AttributeType": "S"
+		},
+		{
+		"AttributeName": "MnfctYear",
+		"AttributeType": "S"
+		},
+		{
+		"AttributeName": "Cost",
+		"AttributeType": "S"
+		}
+	],
+	"KeySchema": [{
+		"AttributeName": "Skew",
+		"KeyType": "HASH"
+	}],
+	"GlobalSecondaryIndexes": [
+		{ 
+			"IndexName": "DateIssdIdx",
+			"KeySchema" : [
+				{
+					"AttributeName": "MnfctYear",
+					"KeyType": "HASH"
+				},
+				{
+					"AttributeName": "DateIssd",
+					"KeyType": "RANGE"
+				}
+			],
+			"Projection" : {
+				"ProjectionType" : "ALL"
+			},
+			"ProvisionedThroughput" : {
+				"ReadCapacityUnits" : 1,
+				"WriteCapacityUnits" : 1
+			}
+		},
+				{ 
+			"IndexName": "DateBBIdx",
+			"KeySchema" : [
+				{
+					"AttributeName": "MnfctYear",
+					"KeyType": "HASH"
+				},
+				{
+					"AttributeName": "DateBB",
+					"KeyType": "RANGE"
+				}
+			],
+			"Projection" : {
+				"ProjectionType" : "ALL"
+			},
+			"ProvisionedThroughput" : {
+				"ReadCapacityUnits" : 1,
+				"WriteCapacityUnits" : 1
+			}
+		},
+						{ 
+			"IndexName": "CostIndx",
+			"KeySchema" : [
+				{
+					"AttributeName": "MnfctYear",
+					"KeyType": "HASH"
+				},
+				{
+					"AttributeName": "Cost",
+					"KeyType": "RANGE"
+				}
+			],
+			"Projection" : {
+				"ProjectionType" : "ALL"
+			},
+			"ProvisionedThroughput" : {
+				"ReadCapacityUnits" : 1,
+				"WriteCapacityUnits" : 1
+			}
+		},
+				{ 
+			"IndexName": "DateMncftIdx",
+			"KeySchema" : [
+				{
+					"AttributeName": "MnfctYear",
+					"KeyType": "HASH"
+				},
+				{
+					"AttributeName": "DateMnfct",
+					"KeyType": "RANGE"
+				}
+			],
+			"Projection" : {
+				"ProjectionType" : "ALL"
+			},
+			"ProvisionedThroughput" : {
+				"ReadCapacityUnits" : 1,
+				"WriteCapacityUnits" : 1
+			}
+		}
+	],
+	"ProvisionedThroughput": {
+		"ReadCapacityUnits": 5,
+		"WriteCapacityUnits": 5
+	}
+}

@@ -6,9 +6,6 @@
 		"DateIssd": {
 			"S": "2016-10-13"
 		},
-		"ID": {
-			"S": "secondItem123123"
-		},
 		"BatchNumber": {
 			"N": "69"
 		},
@@ -42,7 +39,7 @@
 		"ImmediateActions": {
 			"S": "Isolated problem, Recalled Batch"
 		},
-		"ProductionDescription": {
+		"ProductDescription": {
 			"S": "Green Tea Yogurt"
 		},
 		"RootCause": {

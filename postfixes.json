@@ -1,13 +1,11 @@
 {
-    "BUCKET": "-aws-cms",
     "REST_API": "-aws-api",
     "LAMBDA_FUNCTION": "-aws-sys-Controller",
     "LAMBDA_ROLE": "-aws-Lambda",
-    "BLOG_TABLE": "-aws-sys-Blog",
-    "PAGE_TABLE": "-aws-sys-Page",
 	"ROLE_TABLE": "-aws-sys-Role",
     "TOKEN_TABLE": "-aws-sys-Token",
     "USER_TABLE": "-aws-sys-User",
-    "NCR_TABLE": "-aws-sys-NCR",
+    "NCR_TABLE": "-aws-sys-NCR-R",
+    "NCR_NR_TABLE": "-aws-sys-NCR-NR",
     "SOP_TABLE": "-aws-sys-SOP"
 }

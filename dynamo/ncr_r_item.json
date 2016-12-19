@@ -3,11 +3,8 @@
 		"Skew": {
 			"S": "2as234dasd2342344322344dasq3"
 		},
-		"DateIssd:": {
-			"S": "13/10/2016"
-		},
-		"ID": {
-			"S": "seconditem123123"
+		"DateIssd": {
+			"S": "2016-10-13"
 		},
 		"BatchNumber": {
 			"N": "69"
@@ -19,7 +16,7 @@
 			"S": "2016"
 		},
 		"DateMnfct": {
-			"S": "2016-12-20"
+			"S": "2016-12-19"
 		},
 		"DateBB": {
 			"S": "15/12/2016"
@@ -42,7 +39,7 @@
 		"ImmediateActions": {
 			"S": "Isolated problem, Recalled Batch"
 		},
-		"ProductionDescription": {
+		"ProductDescription": {
 			"S": "Green Tea Yogurt"
 		},
 		"RootCause": {
