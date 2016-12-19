@@ -25,7 +25,7 @@ def handler(event, context):
     # Function dispatcher dictionary
     functions = {
         "get_records" : DynamoController.get_records,
-        "get_records_date_range" : DynamoController.get_records_date_range,
+        "get_records_query" : DynamoController.get_records_query,
         "get_record" : DynamoController.get_record,
         "put_record" : DynamoController.put_record,
         "remove_record" : DynamoController.remove_record,
