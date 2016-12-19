@@ -10,10 +10,13 @@
 			"S": "seconditem123123"
 		},
 		"BatchNumber": {
-			"N": 69
+			"N": "69"
 		},
 		"Cost": {
 			"S": "$2.50"
+		},
+		"MnfctYear": {
+			"S": "2016"
 		},
 		"DateMnfct": {
 			"S": "2016-12-20"

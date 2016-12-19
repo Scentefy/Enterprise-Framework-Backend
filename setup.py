@@ -25,27 +25,21 @@ if len(sys.argv) == 3:
 else:
     cms = cms_functions.AwsFunc(sys.argv[1])
 
-# # Create the rest api
-# cms.create_rest_api()
+# Create the rest api
+cms.create_rest_api()
 
-# # Create the lambda function
-# cms.create_lambda_function()
+# Create the lambda function
+cms.create_lambda_function()
 
-# # Setup the rest api
-# cms.api_add_post_method()
-# cms.api_add_options_method()
-# cms.deploy_api()
+# Setup the rest api
+cms.api_add_post_method()
+cms.api_add_options_method()
+cms.deploy_api()
 
 # Create the s3 bucket
 # cms.create_bucket()
 # Create the cloudfront distribution
 # cms.create_cloudfront_distribution() TODO: Reactivate
-
-# Create the dynamodb blog table
-# cms.create_blog_table()
-
-# Create the dynamodb page table
-# cms.create_page_table()
 
 # # Create the dynamodb token table
 # cms.create_token_table()
@@ -65,6 +59,7 @@ else:
 cms.create_table("ncr_table","NCR_TABLE")
 # Add a default value to the ncr table
 cms.create_default_db_entry("ncr_item","NCR_TABLE")
+cms.create_default_db_entry("ncr_item_2","NCR_TABLE")
 
 # # # Print the default login credentials and the login link
 # # cms.print_login_link()
