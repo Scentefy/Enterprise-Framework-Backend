@@ -14,6 +14,7 @@ import sys
 import time
 import uuid
 import zipfile
+import datetime
 from io import BytesIO
 
 import boto3
@@ -318,6 +319,32 @@ class AwsFunc:
         default_json["Item"]["ID"] = {"S": str(uuid.uuid4())}
         
         try:
+            print "Creating admin db entry"
+            dynamodb = boto3.client("dynamodb")
+            dynamodb.put_item(**default_json)
+
+        #    for x in range(10):
+        #        nextdate = json.dumps({"Item" :"DateIssd"})
+        #        nextdate = nextdate.strftime("%a, %d-%b-%Y %H:%M:%S UTC")
+        #        nextdate = nextdate + datetime.timedelta(days=1)
+        #        default_json["Item"]["ID"] = {"S": str(uuid.uuid4())}
+        #        default_json["Item"]["DateIssd"] ={"S": str(nextdate())}
+        #        dynamodb.put_item(**default_json)
+
+            print "Admin db entry created"
+        except botocore.exceptions.ClientError as e:
+            print e.response["Error"]["Code"]
+            print e.response["Error"]["Message"]
+            sys.exit()
+
+    def debug_create_ncr_records(self, table_name, constants, record_count):
+        """ Creates an entry in the database that represents an admin """
+        with open("dynamo/"+ table_name +".json", "r") as thefile:
+            default_json = json.loads(thefile.read())
+        default_json["TableName"] = self.constants[constants]
+        default_json["Item"]["ID"] = {"S": str(uuid.uuid4())}
+        try:
+            print "Creating admin db entry"
             print "Creating db entry"
             dynamodb = boto3.client("dynamodb")
             dynamodb.put_item(**default_json)
