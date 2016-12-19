@@ -11,6 +11,8 @@ import uuid
 import boto3
 import botocore
 
+from boto3.dynamodb.conditions import Key, Attr
+
 class DynamoController(object):
     """ Provides functions for handling dynamo related requests """
     
@@ -45,31 +47,33 @@ class DynamoController(object):
         return {"message": "Successfully fetched items", "status" : "success", "data": items["Items"]}
 
     @staticmethod
-    def get_records_date_range(table, parameters):
+    def get_records_query(table, parameters):
         """
         Function which is used to fetch all records from a table
 
         Expected parameter input value
         {
-            "request" : "get_records",
-            "table_name" : "USER_TABLE",
+            "request" : "get_records_query",
+            "table_name" : "NCR_TABLE",
             "parameters" : {
-                "index_name" : "dateMnfctIdx"
-                "hash_key" : "ID",
+                "index_name" : "DateMncftIdx",
+                "hash_key" : "MnfctYear",
                 "range_key" : "DateMnfct",
-                "date_from" : "2016-12-19",
-                "date_to" : "2016-12-20"
+                "hash_val" : "2016",
+                "range_fval" : "2016-12-19",
+                "range_tval" : "2016-12-20"
             }
         }
         """
         action = "Getting items from the " + table + " table"
         try:
-            dynamodb = boto3.client("dynamodb")
-            dbTable = dynamodb.table(table)
+            dynamodb = boto3.resource("dynamodb")
+            dbTable = dynamodb.Table(table)
             items = dbTable.query(
-                KeyConditionExpression=Key(parameters["hash_key"]).eq(hash_value) & Key(parameters["range_key"]).eq(),
+                KeyConditionExpression=Key(parameters["hash_key"]).eq(parameters["hash_val"]) & 
+                    Key(parameters["range_key"]).between(parameters["range_fval"], parameters["range_tval"]),
                 IndexName=parameters["index_name"],
-                ConsistentRead=True,
+                ConsistentRead=False,
             )
         except botocore.exceptions.ClientError as e:
             return { 
@@ -78,7 +82,7 @@ class DynamoController(object):
                 "data": {"exception": str(e), "action": action}
             }
 
-        return {"message": "Successfully fetched items", "status" : "success", "data": items["Items"]}
+        return {"message": "Successfully fetched items", "status" : "success", "data": items}
 
     @staticmethod
     def get_record(table, parameters):
