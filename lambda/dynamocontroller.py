@@ -54,8 +54,10 @@ class DynamoController(object):
             "request" : "get_records",
             "table_name" : "USER_TABLE",
             "parameters" : {
-                "key_name" : "DateMnfct",
-                "date_from" : "2016-12-19"
+                "index_name" : "dateMnfctIdx"
+                "hash_key" : "ID",
+                "range_key" : "DateMnfct",
+                "date_from" : "2016-12-19",
                 "date_to" : "2016-12-20"
             }
         }
@@ -63,9 +65,11 @@ class DynamoController(object):
         action = "Getting items from the " + table + " table"
         try:
             dynamodb = boto3.client("dynamodb")
-            items = dynamodb.scan(
-                TableName=table, 
-                ConsistentRead=True
+            dbTable = dynamodb.table(table)
+            items = dbTable.query(
+                KeyConditionExpression=Key(parameters["hash_key"]).eq(hash_value) & Key(parameters["range_key"]).eq(),
+                IndexName=parameters["index_name"],
+                ConsistentRead=True,
             )
         except botocore.exceptions.ClientError as e:
             return { 

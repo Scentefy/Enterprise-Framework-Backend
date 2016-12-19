@@ -19,6 +19,10 @@
 		{
 		"AttributeName": "Criteria",
 		"AttributeType": "S"
+		},
+		{
+		"AttributeName": "MnfctYear",
+		"AttributeType": "S"
 		}
 	],
 	"KeySchema": [{
@@ -30,7 +34,7 @@
 			"IndexName": "DateIssdIdx",
 			"KeySchema" : [
 				{
-					"AttributeName": "ID",
+					"AttributeName": "MnfctYear",
 					"KeyType": "HASH"
 				},
 				{
@@ -42,15 +46,15 @@
 				"ProjectionType" : "ALL"
 			},
 			"ProvisionedThroughput" : {
-				"ReadCapacityUnits" : 2,
-				"WriteCapacityUnits" : 2
+				"ReadCapacityUnits" : 1,
+				"WriteCapacityUnits" : 1
 			}
 		},
 				{ 
 			"IndexName": "DateBBIdx",
 			"KeySchema" : [
 				{
-					"AttributeName": "ID",
+					"AttributeName": "MnfctYear",
 					"KeyType": "HASH"
 				},
 				{
@@ -62,15 +66,15 @@
 				"ProjectionType" : "ALL"
 			},
 			"ProvisionedThroughput" : {
-				"ReadCapacityUnits" : 2,
-				"WriteCapacityUnits" : 2
+				"ReadCapacityUnits" : 1,
+				"WriteCapacityUnits" : 1
 			}
 		},
 						{ 
 			"IndexName": "CritIndx",
 			"KeySchema" : [
 				{
-					"AttributeName": "ID",
+					"AttributeName": "MnfctYear",
 					"KeyType": "HASH"
 				},
 				{
@@ -82,15 +86,15 @@
 				"ProjectionType" : "ALL"
 			},
 			"ProvisionedThroughput" : {
-				"ReadCapacityUnits" : 2,
-				"WriteCapacityUnits" : 2
+				"ReadCapacityUnits" : 1,
+				"WriteCapacityUnits" : 1
 			}
 		},
 				{ 
 			"IndexName": "DateMncftIdx",
 			"KeySchema" : [
 				{
-					"AttributeName": "ID",
+					"AttributeName": "MnfctYear",
 					"KeyType": "HASH"
 				},
 				{
@@ -102,8 +106,8 @@
 				"ProjectionType" : "ALL"
 			},
 			"ProvisionedThroughput" : {
-				"ReadCapacityUnits" : 2,
-				"WriteCapacityUnits" : 2
+				"ReadCapacityUnits" : 1,
+				"WriteCapacityUnits" : 1
 			}
 		}
 	],
