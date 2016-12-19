@@ -30,6 +30,8 @@ def handler(event, context):
         "put_record" : DynamoController.put_record,
         "remove_record" : DynamoController.remove_record,
         "edit_record" : DynamoController.put_record,
+		"login" : Security.login,
+		"logout" : Security.logout
      }
     
     # Extract the request body
