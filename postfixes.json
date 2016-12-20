@@ -5,7 +5,9 @@
 	"ROLE_TABLE": "-aws-sys-Role",
     "TOKEN_TABLE": "-aws-sys-Token",
     "USER_TABLE": "-aws-sys-User",
-    "NCR_TABLE": "-aws-sys-NCR-R",
+    "NCR_R_TABLE": "-aws-sys-NCR-R",
     "NCR_NR_TABLE": "-aws-sys-NCR-NR",
+    "NCR_D_TABLE": "-aws-sys-NCR-D",
+    "NCR_N_TABLE": "-aws-sys-NCR-N",
     "SOP_TABLE": "-aws-sys-SOP"
 }

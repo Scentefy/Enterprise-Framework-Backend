@@ -1,0 +1,46 @@
+{
+	"AttributeDefinitions": [
+		{
+            "AttributeName": "Skew",
+            "AttributeType": "S"
+		},
+        {
+            "AttributeName": "DateMnfct",
+            "AttributeType": "S"
+		},
+        {
+            "AttributeName": "USRID",
+            "AttributeType": "S"
+		}
+	],
+	"KeySchema": [{
+		"AttributeName": "Skew",
+		"KeyType": "HASH"
+	}],
+    "GlobalSecondaryIndexes": [
+		{ 
+			"IndexName": "UsrIdx",
+			"KeySchema" : [
+				{
+					"AttributeName": "USRID",
+					"KeyType": "HASH"
+				},
+				{
+					"AttributeName": "DateMnfct",
+					"KeyType": "RANGE"
+				}
+			],
+			"Projection" : {
+				"ProjectionType" : "ALL"
+			},
+			"ProvisionedThroughput" : {
+				"ReadCapacityUnits" : 1,
+				"WriteCapacityUnits" : 1
+			}
+		}
+    ],
+	"ProvisionedThroughput": {
+		"ReadCapacityUnits": 5,
+		"WriteCapacityUnits": 5
+	}
+}

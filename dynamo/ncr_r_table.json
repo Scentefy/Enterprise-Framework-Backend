@@ -17,10 +17,6 @@
 		"AttributeType": "S"
 		},
 		{
-		"AttributeName": "Criteria",
-		"AttributeType": "S"
-		},
-		{
 		"AttributeName": "MnfctYear",
 		"AttributeType": "S"
 		},

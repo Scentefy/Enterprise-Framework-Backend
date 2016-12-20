@@ -55,11 +55,15 @@ else:
 # cms.create_default_db_entry("user","USER_TABLE")
 
 # Creates the NCR table
-cms.create_table("ncr_table","NCR_TABLE")
-cms.create_table("ncr_non_range_table","NCR_NR_TABLE")
+# cms.create_table("ncr_d_table","NCR_D_TABLE")
+# cms.create_table("ncr_nr_table","NCR_NR_TABLE" )
+# cms.create_table("ncr_n_table","NCR_N_TABLE")
+cms.create_table("ncr_r_table","NCR_R_TABLE")
 # DEBUG Add a default values to the ncr table TODO: Remove for release
-cms.create_default_db_entry("ncr_item","NCR_TABLE")
-# cms.create_default_db_entry("ncr_item_2","NCR_TABLE")
+# cms.create_default_db_entry("ncr_d_item","NCR_D_TABLE")
+# cms.create_default_db_entry("ncr_nr_item","NCR_NR_TABLE")
+# cms.create_default_db_entry("ncr_n_item","NCR_N_TABLE")
+cms.create_default_db_entry("ncr_r_item","NCR_R_TABLE")
 
 # # # Print the default login credentials and the login link
 # # cms.print_login_link()

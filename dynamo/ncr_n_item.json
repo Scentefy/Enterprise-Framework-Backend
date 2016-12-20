@@ -3,18 +3,15 @@
 		"Skew": {
 			"S": "2as234dasd2342344322344dasq3"
 		},
-		"BatchNumber": {
-			"N": "69"
-		},
 		"DateMnfct": {
 			"S": "2016-12-19"
 		},
-		"Criteria": {
-			"S": "Bio-Animal"
-		},
-		"ProductDescription": {
-			"S": "Green Tea Yogurt"
-		}
+        "USRID": {
+            "S": "12345678"
+        },
+        "Approved": {
+            "S": "Pending"
+        }
 	},
 	"ReturnConsumedCapacity": "TOTAL"
 }

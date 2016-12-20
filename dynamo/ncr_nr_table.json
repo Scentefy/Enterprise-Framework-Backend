@@ -1,16 +1,20 @@
 {
 	"AttributeDefinitions": [
 		{
-		"AttributeName": "Skew",
-		"AttributeType": "S"
+			"AttributeName": "Skew",
+			"AttributeType": "S"
 		},
 		{
-		"AttributeName": "Criteria",
-		"AttributeType": "S"
+			"AttributeName": "Criteria",
+			"AttributeType": "S"
 		},
 		{
-		"AttributeName": "DateMnfct",
-		"AttributeType": "S"
+			"AttributeName": "DateMnfct",
+			"AttributeType": "S"
+		},
+		{
+			"AttributeName": "ProductDescription",
+			"AttributeType": "S"
 		}
 	],
 	"KeySchema": [{
