@@ -1,0 +1,18 @@
+{
+    "API_PERMISSIONS_URI": "arn:aws:execute-api:us-east-1:265116334736:x4n8bkjz79/*/POST/", 
+    "API_URL": "https://x4n8bkjz79.execute-api.us-east-1.amazonaws.com/prod", 
+    "DISQUS-ID": "arc-cms", 
+    "LAMBDA_FUNCTION": "lol-aws-sys-Controller", 
+    "LAMBDA_ROLE": "lol-aws-Lambda", 
+    "NCR_D_TABLE": "lol-aws-sys-NCR-D", 
+    "NCR_NR_TABLE": "lol-aws-sys-NCR-NR", 
+    "NCR_N_TABLE": "lol-aws-sys-NCR-N", 
+    "NCR_R_TABLE": "lol-aws-sys-NCR-R", 
+    "REST_API": "lol-aws-api", 
+    "REST_API_ID": "x4n8bkjz79", 
+    "REST_API_ROOT_ID": "ucsaafj2a9", 
+    "ROLE_TABLE": "lol-aws-sys-Role", 
+    "SOP_TABLE": "lol-aws-sys-SOP", 
+    "TOKEN_TABLE": "lol-aws-sys-Token", 
+    "USER_TABLE": "lol-aws-sys-User"
+}

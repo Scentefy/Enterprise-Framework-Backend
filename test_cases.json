@@ -32,3 +32,17 @@
 	"request" : "get_records",
 	"table_name" : "USER_TABLE"
 }
+
+
+{
+  "request" : "get_records_query",
+  "parameters" : {
+  	"index_name" : "DateIssdIdx",
+    "hash_key" : "MnfctYear",
+    "range_key" : "DateIssd",
+    "hash_val" : "2016",
+    "range_fval" : "2016-10-10",
+    "range_tval" : "2016-10-14"
+  },
+  "table_name" : "NCR_TABLE"
+}
