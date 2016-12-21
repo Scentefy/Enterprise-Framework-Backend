@@ -52,16 +52,16 @@ lmda_function_names = [
 role_names = [
     constants["LAMBDA_ROLE"]
 ]
-dynamodb_table_names = [
-    constants["BLOG_TABLE"],
-    constants["PAGE_TABLE"],
-    constants["TOKEN_TABLE"],
-    constants["USER_TABLE"],
-    constants["ROLE_TABLE"]
-]
-s3_bucket_names = [
-    constants["BUCKET"]
-]
+# dynamodb_table_names = [
+#     constants["BLOG_TABLE"],
+#     constants["PAGE_TABLE"],
+#     constants["TOKEN_TABLE"],
+#     constants["USER_TABLE"],
+#     constants["ROLE_TABLE"]
+# ]
+# s3_bucket_names = [
+#     constants["BUCKET"]
+# ]
 
 # Remove all AWSCMS api gateways
 print 'Removing rest api'
