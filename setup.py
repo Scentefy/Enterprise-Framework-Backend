@@ -39,7 +39,7 @@ cms.deploy_api()
 cms.create_token_table()
 
 # Create the dunamodb role table
-# cms.create_role_table()
+cms.create_role_table()
 # Add an admin role to the role table
 # cms.create_admin_role_db_entry()
 

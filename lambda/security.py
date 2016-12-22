@@ -57,10 +57,10 @@ class Security(object):
         user = user["Item"]
                     
         # Check that the role has a user associated with it
-        # if not "Role" in user:
-        #     action = "Attempting to log in"
-        #     return {"error": "userHasNoRole",
-        #             "data": {"user": user, "action": action}}
+        if not "RoleID" in user:
+            action = "Attempting to log in"
+            return {"error": "userHasNoRole",
+                    "data": {"user": user, "action": action}}
         
         # Check that the user has a password associated with it
         if not "Password" in user:
@@ -102,14 +102,21 @@ class Security(object):
         return {"message": "Successfully logged in", "Set-Cookie": cookie}
     
     @staticmethod
-    def logout(token, token_table):
+    def logout(table_name, parameters):
         """ Logs out the user who made this request by removing their active
         token from the token table
+        {
+            "request" : "logout",
+            "table_name" : "TOKEN_TABLE",
+            "parameters" : {
+    	        "token": abf17579-f740-4744-b548-16ffa2040b95"
+            }
+        }
         """
         try:
             dynamodb = boto3.client("dynamodb")
             delete_response = dynamodb.delete_item(
-                TableName=token_table, Key={"Token": {"S": token}}
+                TableName=table_name, Key={"Token": {"S": parameters["token"]}}
             )
         except botocore.exceptions.ClientError as e:
             action = "Logging out user"
