@@ -132,8 +132,10 @@ class DynamoController(object):
             "parameters" : {
                 "Email" : { "S" :"example_email@emai.com"},
                 "ID" : { "S": "123" },
+                "FName" : { "S": "john"},
+                "LName" : { "S": "scott"},
                 "Password" : { "S": "this will be hashed and salted here" },
-                "Role" : { "S": "admin" },
+                "RoleID" : { "S": "123123" },
                 "Username" : { "S": "john123" }
             }
         }
