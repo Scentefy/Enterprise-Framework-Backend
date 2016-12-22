@@ -118,7 +118,7 @@ class DynamoController(object):
                 "error": "InvalidItemSelection",
                 "data": {"key": parameters["key"],  "action": action}}
             
-        return {"message": "Successfully fetched item", "status" : "success", "data": items["Item"]}
+        return {"message": "Successfully fetched item", "status" : "success", "data": item["Item"]}
     
     @staticmethod
     def put_record(table, parameters):

@@ -1,7 +1,7 @@
 {
 	"AttributeDefinitions": [
 		{
-			"AttributeName": "ID",
+			"AttributeName": "Username",
 			"AttributeType": "S"
 		},
 		{
@@ -11,7 +11,7 @@
 	],
 	"KeySchema": [
 		{
-			"AttributeName": "ID",
+			"AttributeName": "Username",
 			"KeyType": "HASH"
 		}
 	],
@@ -20,7 +20,7 @@
 			"IndexName": "FNameIndex",
 			"KeySchema" : [
 				{
-					"AttributeName": "ID",
+					"AttributeName": "Username",
 					"KeyType": "HASH"
 				},
 				{

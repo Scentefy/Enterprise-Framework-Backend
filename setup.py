@@ -36,7 +36,7 @@ cms.api_add_options_method()
 cms.deploy_api()
 
 # # Create the dynamodb token table
-# cms.create_token_table()
+cms.create_token_table()
 
 # Create the dunamodb role table
 # cms.create_role_table()

@@ -7,9 +7,12 @@
 
 import datetime
 import uuid
+import json
 
 import boto3
 import botocore
+from dynamocontroller   import DynamoController
+from passlib.hash import pbkdf2_sha256
 
 class Security(object):
     """ Provides a function for authentication and authorization of requests
@@ -17,34 +20,47 @@ class Security(object):
     """
     
     @staticmethod
-    def login(email, password, token, user_table, token_table):
+    def login(table_name, parameters):
         """ Validates a user login request.
             Adds a token to the token table and provides it as a cookie in the
             response for use in future request validation.
-        """
-        # Use email to fetch user information from the user table
+
+            Expected parameter input value
+            {
+                "request" : "login",
+                "table_name" : "USER_TABLE",
+                "parameters" : {
+                    "username" : "mack123",
+                    "password" : "hello123"
+                }
+            }
+        """  
+        # Get info on the cms' resources from the constants file
+        with open("constants.json", "r") as resources_file:
+            resources = json.loads(resources_file.read())
+
+        # Use username to fetch user information from the user table
         try:
             dynamodb = boto3.client("dynamodb")
-            user = dynamodb.get_item(TableName=user_table,
-                                     Key={"Email": {"S": email}})
+            user = dynamodb.get_item(TableName=table_name, Key={"Username" : {"S": parameters["username"]}})
         except botocore.exceptions.ClientError as e:
             action = "Fetching user from the user table for login"
             return {"error": e.response["Error"]["Code"],
                     "data": {"exception": str(e), "action": action}}
         
-        # Check that the email has a user associated with it
+        # Check that the username has a user associated with it
         if not "Item" in user:
             action = "Attempting to log in"
-            return {"error": "invalidEmail",
-                    "data": {"email": email, "action": action}}
+            return {"error": "invalidUsername",
+                    "data": {"username": parameters["username"], "action": action}}
         
         user = user["Item"]
                     
-        # Check that the email has a user associated with it
-        if not "Role" in user:
-            action = "Attempting to log in"
-            return {"error": "userHasNoRole",
-                    "data": {"user": user, "action": action}}
+        # Check that the role has a user associated with it
+        # if not "Role" in user:
+        #     action = "Attempting to log in"
+        #     return {"error": "userHasNoRole",
+        #             "data": {"user": user, "action": action}}
         
         # Check that the user has a password associated with it
         if not "Password" in user:
@@ -55,11 +71,11 @@ class Security(object):
         actual_password = user["Password"]["S"]
         
         # Verify that the password provided is correct
-        valid_password = pbkdf2_sha256.verify(password, actual_password)
+        valid_password = pbkdf2_sha256.verify(parameters["password"], actual_password)
         if not valid_password:
             action = "Attempting to log in"
             return {"error": "invalidPassword",
-                    "data": {"password": password, "action": action}}
+                    "data": {"password": parameters["password"], "action": action}}
         
         # Calculate an exiration date a day from now
         expiration = datetime.datetime.utcnow() + datetime.timedelta(days=1)
@@ -70,9 +86,9 @@ class Security(object):
         # Add the generated token to the token table
         try:
             dynamodb.put_item(
-                TableName=token_table,
+                TableName=resources["TOKEN_TABLE"],
                 Item={"Token": {"S": token},
-                      "UserEmail": {"S": email},
+                      "Username": {"S": parameters["username"]},
                       "Expiration": {"S": expiration}}
             )
         except botocore.exceptions.ClientError as e:
@@ -363,7 +379,3 @@ class Security(object):
     @staticmethod
     def get_permissions_info():
         pass
-
-    @staticmethod
-    def login(username, password):
-        return True

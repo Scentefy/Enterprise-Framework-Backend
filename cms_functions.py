@@ -747,7 +747,8 @@ class AwsFunc:
     
     def remove_lambda_constants(self):
         """ Removes aws service constants from the lambda directory """
-        os.remove("lambda/constants.json")
+        pass
+        #os.remove("lambda/constants.json")
 
 
     def create_api_invocation_uri(self):
@@ -756,6 +757,7 @@ class AwsFunc:
             "arn:aws:apigateway:%s:lambda:"
             "path/2015-03-31/functions/%s/invocations"
         ) % (self.region, self.constants["LAMBDA_FUNCTION_ARN"])
+        print self.constants["API_INVOCATION_URI"]
         
     def create_api_permissions_uri(self):
         """ Creates the uri that is needed for giving the api deployment
