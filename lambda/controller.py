@@ -31,7 +31,9 @@ def handler(event, context):
         "remove_record" : DynamoController.remove_record,
         "edit_record" : DynamoController.put_record,
 		"login" : Security.login,
-		"logout" : Security.logout
+		"logout" : Security.logout,
+        "authenticate" : Security.authenticate,
+        "authorize" : Security.authorize
      }
     
     # Extract the request body

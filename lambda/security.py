@@ -30,8 +30,8 @@ class Security(object):
                 "request" : "login",
                 "table_name" : "USER_TABLE",
                 "parameters" : {
-                    "username" : "mack123",
-                    "password" : "hello123"
+                    "username" : "Suniverse",
+                    "password" : "password123"
                 }
             }
         """  
@@ -104,19 +104,19 @@ class Security(object):
     @staticmethod
     def logout(table_name, parameters):
         """ Logs out the user who made this request by removing their active
-        token from the token table
+        token from the token table. The function does not check if the token is valid or not
         {
             "request" : "logout",
             "table_name" : "TOKEN_TABLE",
             "parameters" : {
-    	        "token": abf17579-f740-4744-b548-16ffa2040b95"
+    	        "token": "abf17579-f740-4744-b548-16ffa2040b95"
             }
         }
         """
         try:
-            dynamodb = boto3.client("dynamodb")
-            delete_response = dynamodb.delete_item(
-                TableName=table_name, Key={"Token": {"S": parameters["token"]}}
+            dynamodb = DynamoController 
+            delete_response = dynamodb.remove_record(
+                table=table_name, parameters={ "key_name": "Token", "key": parameters["token"]}
             )
         except botocore.exceptions.ClientError as e:
             action = "Logging out user"
@@ -126,54 +126,50 @@ class Security(object):
         return {"message": "Successfully logged out"}
     
     @staticmethod
-    def authenticate(token, request, token_table, user_table, role_table):
+    def authenticate(table_name, parameters):
         """
         Function which checks if the user has an active session with system
         by checking if the user has a token
+        {
+            "request" : "authenticate",
+            "table_name" : "TOKEN_TABLE",
+            "parameters" : {
+    	        "token": "abf17579-f740-4744-b548-16ffa2040b95",
+                "request": "authenticate"
+            }
+        }
         """
-        pass
-
-    @staticmethod
-    def authorize(token, request, token_table, user_table, role_table):
-        """
-        Function checks if the user is allowed to perform the request
-        """
-        pass
-
-    @staticmethod
-    def authenticate_and_authorize(token, request, token_table, user_table,
-                                   role_table):
-        """ Authenticates a token and checks that the associated user has the
-        rights to be making a provided request.
-        """
+        # Get info on the cms' resources from the constants file
+        with open("constants.json", "r") as resources_file:
+            resources = json.loads(resources_file.read())
         # Get a dynamodb client object from boto3
         try:
             dynamodb = boto3.client('dynamodb')
         except botocore.exceptions.ClientError as e:
-            action = "Getting dynamodb client"
+            action = "Getting dynamodb client for authentication"
             return {"error": e.response["Error"]["Code"],
                     "data": {"exception": str(e), "action": action}}
-        
+
         # Get Token info
-        token_info = Security.get_token_info(token_table, token, dynamodb)
+        token_info = Security.get_token_info(table_name, parameters["token"], dynamodb)
         
         # Check that the token has an entry in the database associated with it
         if not "Item" in token_info:
             action = "Validating token"
             return {"error": "invalidToken",
-                    "data": {"token": token, "action": action}}
+                    "data": {"token": parameters["token"], "action": action}}
         
         token_info = token_info["Item"]
-        
+
         # Checks if request is logoutUser as permission is not required
-        if request == "logoutUser":
+        if parameters["request"] == "logoutUser":
             return True
         
         # Checks that the token has an expiration date
         if not "Expiration" in token_info:
             action = "Validating token"
             return {"error": "invalidTokenNoExpiration",
-                    "data": {"token": token, "action": action}}
+                    "data": {"token": parameters["token"], "action": action}}
                     
         token_expiration = token_info["Expiration"]["S"]
         
@@ -184,38 +180,67 @@ class Security(object):
             if expiration < datetime.datetime.utcnow():
                 action = "Validating token"
                 return {"error": "expiredToken",
-                        "data": {"token": token, "action": action}}
+                        "data": {"token": parameters["token"], "action": action}}
             
         # Check that the token has a user associated with it
         try:
-            user_email = token_info["UserEmail"]["S"]
+            username = token_info["Username"]["S"]
         except KeyError:
             action = "Fetching user from the user table for authorization"
             return {"error": "tokenHasNoUser",
-                    "data": {"token": token, "action": action}}
+                    "data": {"token": parameters["token"], "action": action}}
         
-        # Get user Information from the user table
-        user_info = Security.get_user_info(user_table, user_email, dynamodb)
-
+        # Get user information from the user table
+        user_info = Security.get_user_info(resources["USER_TABLE"], username, dynamodb)
+       
         # Check that the user id has an entry in the database associated with it
         if not "Item" in user_info:
             action = "Fetching user from the user table for authorization"
             return {"error": "invalidUserAssociatedWithToken",
-                    "data": {"user": user_email, "action": action}}
+                    "data": {"user": username, "action": action}}
 
-        # Extract Item from dynamo response
-        user_info = user_info["Item"]
+        return user_info["Item"]            
+
+
+    @staticmethod
+    def authorize(table_name, parameters):
+        """
+        Function checks if the user is allowed to perform the request
+        {
+            "request" : "authorize",
+            "table_name" : "ROLE_TABLE",
+            "parameters" : {
+    	        "username": "Suniverse",
+                "request": "authorize"
+            }
+        }
+        """
+        # Get info on the cms' resources from the constants file
+        with open("constants.json", "r") as resources_file:
+            resources = json.loads(resources_file.read())
+
+        # Get a dynamodb client object from boto3
+        try:
+            dynamodb = boto3.client('dynamodb')
+        except botocore.exceptions.ClientError as e:
+            action = "Getting dynamodb client for authentication"
+            return {"error": e.response["Error"]["Code"],
+                    "data": {"exception": str(e), "action": action}}
+
+        # Get user information from the user table
+        user_info = Security.get_user_info(resources["USER_TABLE"], parameters["username"], dynamodb)["Item"]
 
         # Check that the user has a role associated with it
-        if not "Role" in user_info:
+        if not "RoleID" in user_info:
             action = "Fetching user from the user table for authorization"
-            return {"error": "userHasNoRole",
-                    "data": {"user": user_email, "action": action}}
-        
-        user_role = user_info["Role"]["S"]
+            return {"error": "userHasNoRoleID",
+                    "data": {"user": parameters["username"], "action": action}}
+
+        # Get user's role information from the user table
+        user_role = user_info["RoleID"]["S"]
 
         # Query the role table for the role extracted from the user
-        role_info = Security.get_role_info(role_table, user_role, dynamodb)
+        role_info = Security.get_role_info(table_name, user_role, dynamodb)
 
         # Check for return of item or items
         if not role_info.get("Items") is None:
@@ -239,7 +264,109 @@ class Security(object):
 
         # Return error as user did not pass permissions check
         return {"error": "notAuthorizedForRequest",
-                "data": {"user": user_email, "request": request}}
+                "data": {"user": username, "request": request}}
+        
+
+    # @staticmethod
+    # def authenticate_and_authorize(token, request, token_table, user_table,
+    #                                role_table):
+    #     """ Authenticates a token and checks that the associated user has the
+    #     rights to be making a provided request.
+    #     """
+    #     # Get a dynamodb client object from boto3
+    #     try:
+    #         dynamodb = boto3.client('dynamodb')
+    #     except botocore.exceptions.ClientError as e:
+    #         action = "Getting dynamodb client"
+    #         return {"error": e.response["Error"]["Code"],
+    #                 "data": {"exception": str(e), "action": action}}
+        
+    #     # Get Token info
+    #     token_info = Security.get_token_info(token_table, token, dynamodb)
+        
+    #     # Check that the token has an entry in the database associated with it
+    #     if not "Item" in token_info:
+    #         action = "Validating token"
+    #         return {"error": "invalidToken",
+    #                 "data": {"token": token, "action": action}}
+        
+    #     token_info = token_info["Item"]
+        
+    #     # Checks if request is logoutUser as permission is not required
+    #     if request == "logoutUser":
+    #         return True
+        
+    #     # Checks that the token has an expiration date
+    #     if not "Expiration" in token_info:
+    #         action = "Validating token"
+    #         return {"error": "invalidTokenNoExpiration",
+    #                 "data": {"token": token, "action": action}}
+                    
+    #     token_expiration = token_info["Expiration"]["S"]
+        
+    #     # Check that the token is not expired
+    #     if not token_expiration == "None":
+    #         expiration = datetime.datetime.strptime(token_expiration,
+    #                                                 "%a, %d-%b-%Y %H:%M:%S UTC")
+    #         if expiration < datetime.datetime.utcnow():
+    #             action = "Validating token"
+    #             return {"error": "expiredToken",
+    #                     "data": {"token": token, "action": action}}
+            
+    #     # Check that the token has a user associated with it
+    #     try:
+    #         user_email = token_info["UserEmail"]["S"]
+    #     except KeyError:
+    #         action = "Fetching user from the user table for authorization"
+    #         return {"error": "tokenHasNoUser",
+    #                 "data": {"token": token, "action": action}}
+        
+    #     # Get user information from the user table
+    #     user_info = Security.get_user_info(user_table, user_email, dynamodb)
+
+    #     # Check that the user id has an entry in the database associated with it
+    #     if not "Item" in user_info:
+    #         action = "Fetching user from the user table for authorization"
+    #         return {"error": "invalidUserAssociatedWithToken",
+    #                 "data": {"user": user_email, "action": action}}
+
+    #     # Extract Item from dynamo response
+    #     user_info = user_info["Item"]
+
+    #     # Check that the user has a role associated with it
+    #     if not "Role" in user_info:
+    #         action = "Fetching user from the user table for authorization"
+    #         return {"error": "userHasNoRole",
+    #                 "data": {"user": user_email, "action": action}}
+        
+    #     user_role = user_info["Role"]["S"]
+
+    #     # Query the role table for the role extracted from the user
+    #     role_info = Security.get_role_info(role_table, user_role, dynamodb)
+
+    #     # Check for return of item or items
+    #     if not role_info.get("Items") is None:
+    #         collectionName = "Items"
+    #     elif not role_info.get("Item") is None:
+    #         collectionName = "Item"
+
+    #     # Get collection out of dynamo reponse value
+    #     role_info = role_info[collectionName]
+            
+    #     role_permissions = role_info["Permissions"]["SS"]
+
+    #     # Check that the user is authorized to perform the request
+    #     if not request == "getPermissions":
+    #         if request in role_permissions or "all" in role_permissions:
+    #             user_info["Permissions"] = role_permissions
+    #             return user_info
+    #     else:
+    #         user_info["Permissions"] = ["getPermissions"];
+    #         return user_info
+
+    #     # Return error as user did not pass permissions check
+    #     return {"error": "notAuthorizedForRequest",
+    #             "data": {"user": user_email, "request": request}}
 
     
     @staticmethod
@@ -295,7 +422,7 @@ class Security(object):
             return {"error": "tokenHasNoUser",
                     "data": {"token": token, "action": action}}
         
-        # Get user Information from the user table
+        # Get user information from the user table
         user_info = Security.get_user_info(user_table, user_email, dynamodb)
 
         # Check that the user id has an entry in the database associated with it
@@ -308,12 +435,12 @@ class Security(object):
         user_info = user_info["Item"]
 
         # Check that the user has a role associated with it
-        if not "Role" in user_info:
+        if not "RoleID" in user_info:
             action = "Fetching user from the user table for authorization"
-            return {"error": "userHasNoRole",
+            return {"error": "userHasNoRoleID",
                     "data": {"user": user_email, "action": action}}
         
-        user_role = user_info["Role"]["S"]
+        user_role = user_info["RoleID"]["S"]
 
         # Query the role table for the role extracted from the user
         role_info = Security.get_role_info(role_table, user_role, dynamodb)
@@ -344,12 +471,12 @@ class Security(object):
                     "data": {"user": user_email, "action": action}}
 
     @staticmethod
-    def get_user_info(user_table, user_email, dynamodb):
-        # Query the user table for the user id extracted from the token table
+    def get_user_info(user_table, username, dynamodb):
+        # Query the user table for the username extracted from the token table
         try:
             user_info = dynamodb.get_item(
                 TableName=user_table,
-                Key={"Email": {"S": user_email}}
+                Key={"Username": {"S": username }}
             )
         except botocore.exceptions.ClientError as e:
             action = "Querying the user table for authorization"
@@ -375,7 +502,7 @@ class Security(object):
         try:
             role_info = dynamodb.get_item(
                 TableName=role_table,
-                Key={"RoleName": {"S": user_role}}
+                Key={"RoleID": {"S": user_role}}
             )
         except botocore.exceptions.ClientError as e:
             action = "Querying the role table for authorization"
