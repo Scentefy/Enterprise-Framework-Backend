@@ -211,7 +211,7 @@ class Security(object):
             "table_name" : "ROLE_TABLE",
             "parameters" : {
     	        "username": "Suniverse",
-                "request": "authorize"
+                "request": "createNCR"
             }
         }
         """
@@ -248,14 +248,27 @@ class Security(object):
         elif not role_info.get("Item") is None:
             collectionName = "Item"
 
+        # Check that the role name has a role associated with it
+        if not collectionName in role_info:
+            action = "Fetching role from the role table for authorization"
+            return {"error": "invalidRoleAssociatedWithUser",
+                    "data": {"user": parameters["username"], "action": action}}
+
         # Get collection out of dynamo reponse value
         role_info = role_info[collectionName]
-            
-        role_permissions = role_info["Permissions"]["SS"]
+                    
+        # Check that the role has permissions
+        if not "RolePermissions" in role_info:
+            action = "Fetching role from the role table for authorization"
+            return {"error": "roleHasNoPermissions",
+                    "data": {"user": parameters["username"], "action": action}}
+
+        role_permissions = role_info["RolePermissions"]["SS"]
+
 
         # Check that the user is authorized to perform the request
-        if not request == "getPermissions":
-            if request in role_permissions or "all" in role_permissions:
+        if not parameters["request"] == "getPermissions":
+            if parameters["request"] in role_permissions or "all" in role_permissions:
                 user_info["Permissions"] = role_permissions
                 return user_info
         else:
@@ -264,7 +277,7 @@ class Security(object):
 
         # Return error as user did not pass permissions check
         return {"error": "notAuthorizedForRequest",
-                "data": {"user": username, "request": request}}
+                "data": {"user": parameters["username"], "request": parameters["request"]}}
         
 
     # @staticmethod
